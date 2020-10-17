@@ -38,7 +38,3 @@ def get_entries_by_date(date_object):
         if timestamp.date() == date_object.date():
             results.append(row_dict)
     return results
-
-
-if __name__ == "__main__":
-    pass

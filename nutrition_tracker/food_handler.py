@@ -21,15 +21,3 @@ def search_food(query_string) -> List[FoodItem]:
 
 def get_food_nutrition_by_id(food_id) -> FoodItem:
     return search_food(food_id)[0]
-
-
-if __name__ == "__main__":
-    create_food(
-        description='Peanut',
-        serving_unit='g',
-        serving_size=100,
-        calories=100,
-        total_fat=5,
-        total_carbs=10,
-        protein=4,
-    )
