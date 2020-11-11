@@ -12,11 +12,18 @@ def create_food(**kwargs) -> None:
         f.write(f"{json.dumps(food_item)}\n")
 
 
-def search_food(query_string) -> List[Dict]:
+def _get_foods():
     with open('foods.txt', 'r') as f:
-        lines = f.readlines()
-    return [json.loads(line) for line in lines if query_string.lower() in str(line).lower()]
+        return f.readlines()
+
+
+def search_food(query_string) -> List[Dict]:
+    return [json.loads(line) for line in _get_foods() if query_string.lower() in str(line).lower()]
 
 
 def get_food_nutrition_by_id(food_id) -> Dict:
-    return search_food(food_id)[0]
+    lines = _get_foods()
+    for line in lines:
+        line_dict = json.loads(line)
+        if line_dict["id"] == food_id:
+            return line_dict
