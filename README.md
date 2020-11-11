@@ -1,5 +1,2 @@
 # NutritionTracker
-Components to track nutrition by implementing the familiar Food Diary.
-
-## To Do
-1. Figure out target architecture
+Python CLI-based front end for setup/testing and planning feature roadmap.
