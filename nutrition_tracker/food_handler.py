@@ -1,23 +1,22 @@
 import json
-from typing import List
+from typing import List, Dict
 
 import uuid
-
-from nutrition_tracker.food_item import FoodItem
 
 
 def create_food(**kwargs) -> None:
     unique_id = str(uuid.uuid4())
-    food_item = FoodItem(id=unique_id, **kwargs)
+    food_item = kwargs
+    food_item["id"] = unique_id
     with open('foods.txt', 'a') as f:
-        f.write(f"{json.dumps(food_item.__dict__)}\n")
+        f.write(f"{json.dumps(food_item)}\n")
 
 
-def search_food(query_string) -> List[FoodItem]:
+def search_food(query_string) -> List[Dict]:
     with open('foods.txt', 'r') as f:
         lines = f.readlines()
-    return [FoodItem(**json.loads(line)) for line in lines if query_string.lower() in str(line).lower()]
+    return [json.loads(line) for line in lines if query_string.lower() in str(line).lower()]
 
 
-def get_food_nutrition_by_id(food_id) -> FoodItem:
+def get_food_nutrition_by_id(food_id) -> Dict:
     return search_food(food_id)[0]
